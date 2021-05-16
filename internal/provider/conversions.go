@@ -1,4 +1,4 @@
-package terraform
+package provider
 
 // converting array of unknown types into array
 // of strings

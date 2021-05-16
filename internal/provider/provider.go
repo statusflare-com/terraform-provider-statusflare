@@ -1,4 +1,4 @@
-package terraform
+package provider
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 )
 
 // This is provider's 'main' entry point.
-func StatusflareProvider(version string) *schema.Provider {
+func New(version string) *schema.Provider {
 
 	configFields := map[string]*schema.Schema{
 		"account_id": {

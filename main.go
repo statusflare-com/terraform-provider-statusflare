@@ -7,7 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
-	"github.com/statusflare/terraform-provider-statusflare/terraform"
+	"github.com/statusflare/terraform-provider-statusflare/internal/provider"
 )
 
 var (
@@ -28,7 +28,7 @@ func main() {
 
 	opts := &plugin.ServeOpts{
 		ProviderFunc: func() *schema.Provider {
-			return terraform.StatusflareProvider(version)
+			return provider.New(version)
 		},
 	}
 
