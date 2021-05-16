@@ -16,6 +16,5 @@ install: build
 
 clean:
 	rm -rf ${BINARY}
-	rm -rf ./docs
 	rm -rf ./examples/.terraform
 	rm -rf ./examples/terraform.*
