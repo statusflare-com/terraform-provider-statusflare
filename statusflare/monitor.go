@@ -6,7 +6,7 @@ import (
 )
 
 type Monitor struct {
-	ID           string   `json:"id"`
+	Id           string   `json:"id"`
 	Name         string   `json:"name"`
 	URL          string   `json:"url"`
 	Scheme       string   `json:"schema"` // not sure if it's typo in API, but I'm using Scheme here
@@ -33,14 +33,10 @@ func (c *Client) CreateMonitor(m *Monitor) error {
 		return err
 	}
 
-	url := fmt.Sprintf("/uptime/%s", c.accountID)
+	url := fmt.Sprintf("/uptime/%s", c.accountId)
 	resp, err := c.makeAPICall("POST", url, body)
 	if err != nil {
 		return err
-	}
-
-	if resp.StatusCode != 200 {
-		return fmt.Errorf("the server respond %d", resp.StatusCode)
 	}
 
 	return unmarshallResp(resp, m)
@@ -48,9 +44,9 @@ func (c *Client) CreateMonitor(m *Monitor) error {
 
 // returns list of all monitors
 // the pagination is currently questionable. Let's
-// assume function gives you all moninots
+// assume function gives you all monitors
 func (c *Client) AllMonitors() ([]*Monitor, error) {
-	url := fmt.Sprintf("/uptime/%s", c.accountID)
+	url := fmt.Sprintf("/uptime/%s", c.accountId)
 	resp, err := c.makeAPICall("GET", url, nil)
 	if err != nil {
 		return []*Monitor{}, err
@@ -67,7 +63,7 @@ func (c *Client) AllMonitors() ([]*Monitor, error) {
 func (c *Client) GetMonitor(id string) (*Monitor, error) {
 	var monitor Monitor
 
-	url := fmt.Sprintf("/uptime/%s/%s", c.accountID, id)
+	url := fmt.Sprintf("/uptime/%s/%s", c.accountId, id)
 	resp, err := c.makeAPICall("GET", url, nil)
 	if err != nil {
 		return &monitor, err
@@ -92,14 +88,10 @@ func (c *Client) SaveMonitor(m *Monitor) error {
 		return err
 	}
 
-	url := fmt.Sprintf("/uptime/%s/%s", c.accountID, m.ID)
+	url := fmt.Sprintf("/uptime/%s/%s", c.accountId, m.Id)
 	resp, err := c.makeAPICall("PUT", url, body)
 	if err != nil {
 		return err
-	}
-
-	if resp.StatusCode != 200 {
-		return fmt.Errorf("the server respond %d", resp.StatusCode)
 	}
 
 	return unmarshallResp(resp, m)
@@ -107,14 +99,10 @@ func (c *Client) SaveMonitor(m *Monitor) error {
 
 // function delete the monitor in statusflare.
 func (c *Client) DeleteMonitor(id string) error {
-	url := fmt.Sprintf("/uptime/%s/%s", c.accountID, id)
-	resp, err := c.makeAPICall("DELETE", url, nil)
+	url := fmt.Sprintf("/uptime/%s/%s", c.accountId, id)
+	_, err := c.makeAPICall("DELETE", url, nil)
 	if err != nil {
 		return err
-	}
-
-	if resp.StatusCode != 200 {
-		return fmt.Errorf("the server respond %d", resp.StatusCode)
 	}
 
 	return nil

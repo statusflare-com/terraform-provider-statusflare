@@ -14,25 +14,25 @@ func New(version string) *schema.Provider {
 	configFields := map[string]*schema.Schema{
 		"api_url": {
 			Type:        schema.TypeString,
-			Optional:    true,
+			Required:    true,
 			DefaultFunc: schema.EnvDefaultFunc("SF_API_URL", "https://api.statusflare.com"),
 			Description: "Statusflare API URL.",
 		},
 		"account_id": {
 			Type:        schema.TypeString,
-			Optional:    true,
+			Required:    true,
 			DefaultFunc: schema.EnvDefaultFunc("SF_ACCOUNT_ID", nil),
 			Description: "Your Statusflare Account ID. This can also be specified with the `SF_ACCOUNT_ID` env. variable.",
 		},
 		"key_id": {
 			Type:        schema.TypeString,
-			Optional:    true,
+			Required:    true,
 			DefaultFunc: schema.EnvDefaultFunc("SF_KEY_ID", nil),
 			Description: "Your token's key ID. This can also be specified with the `SF_KEY_ID` env. variable.",
 		},
 		"token": {
 			Type:        schema.TypeString,
-			Optional:    true,
+			Required:    true,
 			DefaultFunc: schema.EnvDefaultFunc("SF_TOKEN", nil),
 			Description: "Token's secret part. This can also be specified with the `SF_TOKEN` env. variable.",
 		},
@@ -40,7 +40,8 @@ func New(version string) *schema.Provider {
 
 	return &schema.Provider{
 		ResourcesMap: map[string]*schema.Resource{
-			"statusflare_monitor": resourceMonitor(),
+			"statusflare_monitor":     resourceMonitor(),
+			"statusflare_integration": resourceIntegration(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"statusflare_integration": dataSourceIntegration(),

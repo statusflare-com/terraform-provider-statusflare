@@ -6,9 +6,8 @@ description: |-
   
 ---
 
-# Statusflare Provider
+# statusflare Provider
 
-The Statusflare provider is used to interact with Statusflare monitor & integration resources.
 
 
 ## Example Usage
@@ -35,6 +34,7 @@ provider "statusflare" {
 
 ### Optional
 
-- **account_id** (String) Your Statusflare Account ID. This can also be specified with the `STATUSFLARE_ACCOUNT_ID` env. variable.
-- **key_id** (String) Your token's key ID. This can also be specified with the `STATUSFLARE_KEY_ID` env. variable.
-- **token** (String) Token's secret part. This can also be specified with the `STATUSFLARE_TOKEN` env. variable.
+- **account_id** (String) Your Statusflare Account ID. This can also be specified with the `SF_ACCOUNT_ID` env. variable.
+- **api_url** (String) Statusflare API URL.
+- **key_id** (String) Your token's key ID. This can also be specified with the `SF_KEY_ID` env. variable.
+- **token** (String) Token's secret part. This can also be specified with the `SF_TOKEN` env. variable.

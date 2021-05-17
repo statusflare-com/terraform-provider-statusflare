@@ -14,8 +14,8 @@ import (
 // represent the session to statusflare
 type Client struct {
 	apiUrl    string
-	accountID string
-	keyID     string
+	accountId string
+	keyId     string
 	token     string
 	http      *http.Client
 }
@@ -54,8 +54,8 @@ func DefaultClient() (*Client, error) {
 
 	client := &Client{
 		apiUrl:    os.Getenv("SF_API_URL"),
-		accountID: os.Getenv("SF_ACCOUNT_ID"),
-		keyID:     os.Getenv("SF_KEY_ID"),
+		accountId: os.Getenv("SF_ACCOUNT_ID"),
+		keyId:     os.Getenv("SF_KEY_ID"),
 		token:     os.Getenv("SF_TOKEN"),
 		http:      &http.Client{},
 	}
@@ -69,11 +69,11 @@ func DefaultClient() (*Client, error) {
 //
 // The account ID identify the whole account. Account might
 // have multiple key IDs with tokens.
-func NewClient(apiUrl string, accountID string, keyID string, token string) *Client {
+func NewClient(apiUrl string, accountId string, keyId string, token string) *Client {
 	return &Client{
 		apiUrl:    apiUrl,
-		accountID: accountID,
-		keyID:     keyID,
+		accountId: accountId,
+		keyId:     keyId,
 		token:     token,
 		http:      &http.Client{},
 	}
@@ -93,7 +93,7 @@ func (c *Client) makeAPICall(method string, endpoint string, body []byte) (*http
 	req, _ := http.NewRequest(method, url, reader)
 	req.Header = map[string][]string{
 		"X-Statusflare-Token":        {c.token},
-		"X-Statusflare-Token-Key-Id": {c.keyID},
+		"X-Statusflare-Token-Key-Id": {c.keyId},
 	}
 
 	resp, err := c.http.Do(req)

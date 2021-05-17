@@ -19,12 +19,13 @@ func Test_MonitorIntegration(t *testing.T) {
 	Convey("When we create a new monitor", t, func() {
 
 		m = &Monitor{
-			Name:         "test-1",
-			URL:          "sme.sk",
+			Name:         "Go test monitor",
+			URL:          "www.statusflare.com",
 			Scheme:       "https",
 			Method:       "GET",
 			ExpectStatus: 200,
 			Worker:       "managed",
+			Integrations: []string{""},
 		}
 
 		err := client.CreateMonitor(m)
@@ -32,8 +33,8 @@ func Test_MonitorIntegration(t *testing.T) {
 			t.Fatalf("%v", err)
 		}
 
-		Convey("Then we cat get this monitor by his ID", func() {
-			_, err := client.GetMonitor(m.ID)
+		Convey("Then we cat get this monitor by its ID", func() {
+			_, err := client.GetMonitor(m.Id)
 			if err != nil {
 				t.Fatalf("%v", err)
 			}
@@ -42,16 +43,16 @@ func Test_MonitorIntegration(t *testing.T) {
 
 	// scenario: change the monitor
 	Convey("When we save the changed monitor", t, func() {
-		m.Name = "test-2"
-		m.URL = "hnonline.sk"
+		m.Name = "Go changed test monitor"
+		m.URL = "dash.statusflare.com"
 		err := client.SaveMonitor(m)
 		if err != nil {
 			t.Fatalf("cannot update monitor: %v", err)
 		}
 
 		Convey("Then the monitor's name is changed", func() {
-			changedm, _ := client.GetMonitor(m.ID)
-			if changedm.Name != "test-zvr-6" {
+			changedm, _ := client.GetMonitor(m.Id)
+			if changedm.Name != "Go changed test monitor" {
 				t.Fatalf("The name of the monitor is unchanged")
 			}
 		})
@@ -59,15 +60,15 @@ func Test_MonitorIntegration(t *testing.T) {
 
 	// scenario: delete the monitor
 	Convey("When we delete the monitor", t, func() {
-		err = client.DeleteMonitor(m.ID)
+		err = client.DeleteMonitor(m.Id)
 		if err != nil {
 			t.Fatalf("error in delete of monitor: %v", err)
 		}
 
 		Convey("Then monitor is no more available in Statusflare", func() {
-			res, err := client.GetMonitor(m.ID)
-			if err == nil && res.ID != "" {
-				t.Fatalf("The monitor still exist, even we delete it (%s)", m.ID)
+			res, err := client.GetMonitor(m.Id)
+			if err == nil && res.Id != "" {
+				t.Fatalf("The monitor still exist, even we delete it (%s)", m.Id)
 			}
 		})
 	})

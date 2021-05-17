@@ -98,7 +98,7 @@ func resourceMonitorCreate(ctx context.Context, d *schema.ResourceData, meta int
 		return diag.FromErr(err)
 	}
 
-	d.SetId(monitor.ID)
+	d.SetId(monitor.Id)
 	resourceMonitorRead(ctx, d, meta)
 	return diags
 }
