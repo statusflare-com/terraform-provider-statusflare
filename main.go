@@ -7,7 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
-	"github.com/statusflare/terraform-provider-statusflare/internal/provider"
+	"github.com/statusflare-com/terraform-provider-statusflare/internal/provider"
 )
 
 var (

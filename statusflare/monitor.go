@@ -40,7 +40,7 @@ func (c *Client) CreateMonitor(m *Monitor) error {
 	}
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("The server respond %d", resp.StatusCode)
+		return fmt.Errorf("the server respond %d", resp.StatusCode)
 	}
 
 	return unmarshallResp(resp, m)
@@ -99,7 +99,7 @@ func (c *Client) SaveMonitor(m *Monitor) error {
 	}
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("The server respond %d", resp.StatusCode)
+		return fmt.Errorf("the server respond %d", resp.StatusCode)
 	}
 
 	return unmarshallResp(resp, m)
@@ -114,7 +114,7 @@ func (c *Client) DeleteMonitor(id string) error {
 	}
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("The server respond %d", resp.StatusCode)
+		return fmt.Errorf("the server respond %d", resp.StatusCode)
 	}
 
 	return nil
