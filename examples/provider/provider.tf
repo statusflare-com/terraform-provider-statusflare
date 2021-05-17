@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     statusflare = {
-      version = "~> 1.0"
-      source  = "statusflare.com/statusflare/statusflare"
+      version = "~> 0.1"
+      source  = "statusflare-com/statusflare"
     }
   }
 }
@@ -12,5 +12,3 @@ provider "statusflare" {
   key_id     = "..."
   token      = "***"
 }
-
-
