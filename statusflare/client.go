@@ -3,6 +3,7 @@ package statusflare
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -12,41 +13,50 @@ import (
 
 // represent the session to statusflare
 type Client struct {
-	url       string
+	apiUrl    string
 	accountID string
 	keyID     string
 	token     string
 	http      *http.Client
 }
 
+type ErrorResponse struct {
+	Error struct {
+		Message string `json:"message"`
+	} `json:"error"`
+}
+
 // create default client where all needed data are
 // read from env. variables. The required env. variables
 // are:
-//   - STATUSFLARE_ACCOUNT_ID
-//   - STATUSFLARE_KEY_ID
-//   - STATUSFLARE_TOKEN
+//   - SF_ACCOUNT_ID
+//   - SF_KEY_ID
+//   - SF_TOKEN
 //
 // If none of the env. variables are set, the function returns
 // you nil client and error.
 func DefaultClient() (*Client, error) {
-
-	if os.Getenv("STATUSFLARE_ACCOUNT_ID") == "" {
-		return nil, fmt.Errorf("missing STATUSFLARE_ACCOUNT_ID")
+	if os.Getenv("SF_API_URL") == "" {
+		return nil, fmt.Errorf("missing SF_API_URL")
 	}
 
-	if os.Getenv("STATUSFLARE_KEY_ID") == "" {
-		return nil, fmt.Errorf("missing STATUSFLARE_KEY_ID")
+	if os.Getenv("SF_ACCOUNT_ID") == "" {
+		return nil, fmt.Errorf("missing SF_ACCOUNT_ID")
 	}
 
-	if os.Getenv("STATUSFLARE_TOKEN") == "" {
-		return nil, fmt.Errorf("missing STATUSFLARE_TOKEN")
+	if os.Getenv("SF_KEY_ID") == "" {
+		return nil, fmt.Errorf("missing SF_KEY_ID")
+	}
+
+	if os.Getenv("SF_TOKEN") == "" {
+		return nil, fmt.Errorf("missing SF_TOKEN")
 	}
 
 	client := &Client{
-		url:       "https://api.statusflare.com/",
-		accountID: os.Getenv("STATUSFLARE_ACCOUNT_ID"),
-		keyID:     os.Getenv("STATUSFLARE_KEY_ID"),
-		token:     os.Getenv("STATUSFLARE_TOKEN"),
+		apiUrl:    os.Getenv("SF_API_URL"),
+		accountID: os.Getenv("SF_ACCOUNT_ID"),
+		keyID:     os.Getenv("SF_KEY_ID"),
+		token:     os.Getenv("SF_TOKEN"),
 		http:      &http.Client{},
 	}
 
@@ -59,9 +69,9 @@ func DefaultClient() (*Client, error) {
 //
 // The account ID identify the whole account. Account might
 // have multiple key IDs with tokens.
-func NewClient(accountID string, keyID string, token string) *Client {
+func NewClient(apiUrl string, accountID string, keyID string, token string) *Client {
 	return &Client{
-		url:       "https://api.statusflare.com/",
+		apiUrl:    apiUrl,
 		accountID: accountID,
 		keyID:     keyID,
 		token:     token,
@@ -72,13 +82,14 @@ func NewClient(accountID string, keyID string, token string) *Client {
 // all API calls are performed via this function
 func (c *Client) makeAPICall(method string, endpoint string, body []byte) (*http.Response, error) {
 	var err error
+	var errorResponse ErrorResponse
 	var reader io.Reader
 
 	if body != nil {
 		reader = bytes.NewReader(body)
 	}
 
-	url := c.url + endpoint
+	url := c.apiUrl + endpoint
 	req, _ := http.NewRequest(method, url, reader)
 	req.Header = map[string][]string{
 		"X-Statusflare-Token":        {c.token},
@@ -86,6 +97,18 @@ func (c *Client) makeAPICall(method string, endpoint string, body []byte) (*http
 	}
 
 	resp, err := c.http.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != 200 {
+		err = unmarshallResp(resp, &errorResponse)
+		if err != nil {
+			return nil, fmt.Errorf("reading api error response failed, status code %d", resp.StatusCode)
+		}
+		return nil, errors.New(errorResponse.Error.Message)
+	}
+
 	return resp, err
 }
 

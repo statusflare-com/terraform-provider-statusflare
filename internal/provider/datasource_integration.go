@@ -5,7 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/statusflare/terraform-provider-statusflare/statusflare"
+	"github.com/statusflare-com/terraform-provider-statusflare/statusflare"
 )
 
 func dataSourceIntegration() *schema.Resource {

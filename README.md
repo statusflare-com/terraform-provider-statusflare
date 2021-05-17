@@ -21,7 +21,7 @@ terraform {
   required_providers {
     statusflare = {
       version = "~> 1.0"
-      source  = "statusflare.com/statusflare/statusflare"
+      source  = "github.com/statusflare-com/terraform-provider-statusflare"
     }
   }
 }
