@@ -34,11 +34,14 @@ resource "statusflare_monitor" "example" {
 ### Optional
 
 - **expect_status** (Number) The expected HTTP status code. The default is 200.
-- **id** (String) The ID of this resource.
 - **integrations** (List of String) IDs of integrations attached to this monitor.
 - **method** (String) The HTTP method. The default is 'GET'.
 - **retries** (Number) Retries or also 'notify_after' field in API. The default is 1.
 - **scheme** (String) The scheme might be http or https. The default value is https.
 - **worker** (String) ID of the worker to perform checks from. The default is 'managed'.
+
+### Read-Only
+
+- **id** (String) The ID of this resource.
 
 

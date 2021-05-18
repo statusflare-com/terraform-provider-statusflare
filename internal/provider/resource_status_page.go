@@ -11,6 +11,10 @@ import (
 func resourceStatusPage() *schema.Resource {
 
 	fields := map[string]*schema.Schema{
+		"id": {
+			Type:     schema.TypeString,
+			Computed: true,
+		},
 		"name": {
 			Type:        schema.TypeString,
 			Required:    true,
@@ -227,17 +231,9 @@ func statusPageToData(src *statusflare.StatusPage, dst *schema.ResourceData) {
 	dst.Set("custom_domain_path", src.CustomDomainPath)
 	dst.Set("hide_monitor_details", src.HideMonitorDetails)
 	dst.Set("hide_statusflare", src.HideStatusflare)
-
-	dst.Set("config.title", src.Config.Title)
 	dst.Set("histogram_days", src.Config.HistogramDays)
-	dst.Set("config.logo_url", src.Config.LogoUrl)
-	dst.Set("config.favicon_url", src.Config.FaviconUrl)
-	dst.Set("config.all_monitors_operational", src.Config.AllMonitorsOperational)
-	dst.Set("config.not_all_monitors_operational", src.Config.NotAllMonitorsOperational)
-	dst.Set("config.monitor_operational_label", src.Config.MonitorOperationalLabel)
-	dst.Set("config.monitor_not_operational_label", src.Config.MonitorNotOperationalLabel)
-	dst.Set("config.monitor_no_data_label", src.Config.MonitorNoDataLabel)
-	dst.Set("config.histogram_no_data", src.Config.HistogramNoData)
-	dst.Set("config.histogram_no_incidents", src.Config.HistogramNoIncidents)
-	dst.Set("config.histogram_some_incidents", src.Config.HistogramSomeIncidents)
+
+	// TODO fix refreshing state
+	// [ERROR] setting state: config: must be a map
+	dst.Set("config", src.Config)
 }

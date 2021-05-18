@@ -40,12 +40,14 @@ func New(version string) *schema.Provider {
 
 	return &schema.Provider{
 		ResourcesMap: map[string]*schema.Resource{
-			"statusflare_monitor":     resourceMonitor(),
-			"statusflare_integration": resourceIntegration(),
-			"statusflare_status_page": resourceStatusPage(),
+			"statusflare_monitor":       resourceMonitor(),
+			"statusflare_integration":   resourceIntegration(),
+			"statusflare_status_page":   resourceStatusPage(),
+			"statusflare_custom_domain": resourceCustomDomain(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"statusflare_integration": dataSourceIntegration(),
+			"statusflare_integration":   dataSourceIntegration(),
+			"statusflare_custom_domain": dataSourceCustomDomain(),
 		},
 		ConfigureContextFunc: configure,
 		Schema:               configFields,

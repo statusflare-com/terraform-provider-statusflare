@@ -30,7 +30,10 @@ resource "statusflare_integration" "example" {
 
 ### Optional
 
-- **id** (String) The ID of this resource.
 - **type** (String) Type of the integration, e.g. webhook.
+
+### Read-Only
+
+- **id** (String) The ID of this resource.
 
 

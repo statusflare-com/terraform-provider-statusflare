@@ -11,6 +11,10 @@ import (
 func resourceIntegration() *schema.Resource {
 
 	fields := map[string]*schema.Schema{
+		"id": {
+			Type:     schema.TypeString,
+			Computed: true,
+		},
 		"name": {
 			Type:        schema.TypeString,
 			Required:    true,

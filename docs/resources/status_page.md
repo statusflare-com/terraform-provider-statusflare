@@ -54,7 +54,10 @@ resource "statusflare_status_page" "example" {
 - **hide_monitor_details** (Boolean) Hide monitor details (URL, scheme, ..) on the status page. The default is false.
 - **hide_statusflare** (Boolean) Hide statusflare branding/links on the status page. The default is false.
 - **histogram_days** (Number) Number of days to render on status page for each monitor. The default is 90.
-- **id** (String) The ID of this resource.
 - **monitors** (List of String) IDs of monitors attached to this status page.
+
+### Read-Only
+
+- **id** (String) The ID of this resource.
 
 
