@@ -14,12 +14,12 @@ func resourceMonitor() *schema.Resource {
 		"name": {
 			Type:        schema.TypeString,
 			Required:    true,
-			Description: "The name of the monitor. Must be unique",
+			Description: "The name of the monitor. Must be unique.",
 		},
 		"url": {
 			Type:        schema.TypeString,
 			Required:    true,
-			Description: "URL Address but  without schema. It might be www.example.com",
+			Description: "URL Address but  without schema. It might be www.example.com.",
 		},
 		"scheme": {
 			Type:        schema.TypeString,
@@ -31,7 +31,7 @@ func resourceMonitor() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 			Default:     "GET",
-			Description: "The HTTP method. The default is 'GET'",
+			Description: "The HTTP method. The default is 'GET'.",
 		},
 		"expect_status": {
 			Type:        schema.TypeInt,
@@ -49,7 +49,7 @@ func resourceMonitor() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 			Default:     "managed",
-			Description: "Don't know purpose of this field but default value is 'managed'",
+			Description: "ID of the worker to perform checks from. The default is 'managed'.",
 		},
 		"integrations": {
 			Type:     schema.TypeList,

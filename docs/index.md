@@ -35,6 +35,6 @@ provider "statusflare" {
 ### Optional
 
 - **account_id** (String) Your Statusflare Account ID. This can also be specified with the `SF_ACCOUNT_ID` env. variable.
-- **api_url** (String) Statusflare API URL.
+- **api_url** (String) Statusflare API URL. This can also be specified with the `SF_API_URL` env. variable.
 - **key_id** (String) Your token's key ID. This can also be specified with the `SF_KEY_ID` env. variable.
 - **token** (String) Token's secret part. This can also be specified with the `SF_TOKEN` env. variable.

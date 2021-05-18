@@ -6,7 +6,7 @@ import (
 	. "github.com/smartystreets/goconvey/convey"
 )
 
-func Test_MonitorIntegration(t *testing.T) {
+func Test_Monitor(t *testing.T) {
 
 	var m *Monitor
 
@@ -25,7 +25,7 @@ func Test_MonitorIntegration(t *testing.T) {
 			Method:       "GET",
 			ExpectStatus: 200,
 			Worker:       "managed",
-			Integrations: []string{""},
+			Integrations: []string{},
 		}
 
 		err := client.CreateMonitor(m)

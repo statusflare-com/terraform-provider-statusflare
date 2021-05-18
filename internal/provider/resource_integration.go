@@ -14,20 +14,20 @@ func resourceIntegration() *schema.Resource {
 		"name": {
 			Type:        schema.TypeString,
 			Required:    true,
-			Description: "The name of the integration",
+			Description: "The name of the integration.",
 		},
 		"type": {
 			Type:        schema.TypeString,
 			Optional:    true,
 			Default:     "webhook",
-			Description: "Type of the integration, e.g. webhook",
+			Description: "Type of the integration, e.g. webhook.",
 		},
 		"secret": {
 			Type:        schema.TypeString,
 			Required:    true,
 			ForceNew:    true,
 			Sensitive:   true,
-			Description: "The secret of the integration, e.g. webhook URL",
+			Description: "The secret of the integration, e.g. webhook URL.",
 		},
 	}
 

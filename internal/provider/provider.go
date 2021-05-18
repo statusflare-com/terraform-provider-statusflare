@@ -16,7 +16,7 @@ func New(version string) *schema.Provider {
 			Type:        schema.TypeString,
 			Required:    true,
 			DefaultFunc: schema.EnvDefaultFunc("SF_API_URL", "https://api.statusflare.com"),
-			Description: "Statusflare API URL.",
+			Description: "Statusflare API URL. This can also be specified with the `SF_API_URL` env. variable.",
 		},
 		"account_id": {
 			Type:        schema.TypeString,
@@ -42,6 +42,7 @@ func New(version string) *schema.Provider {
 		ResourcesMap: map[string]*schema.Resource{
 			"statusflare_monitor":     resourceMonitor(),
 			"statusflare_integration": resourceIntegration(),
+			"statusflare_status_page": resourceStatusPage(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"statusflare_integration": dataSourceIntegration(),

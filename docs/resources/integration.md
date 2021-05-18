@@ -25,12 +25,12 @@ resource "statusflare_integration" "example" {
 
 ### Required
 
-- **name** (String) The name of the integration
-- **secret** (String, Sensitive) The secret of the integration, e.g. webhook URL
+- **name** (String) The name of the integration.
+- **secret** (String, Sensitive) The secret of the integration, e.g. webhook URL.
 
 ### Optional
 
 - **id** (String) The ID of this resource.
-- **type** (String) Type of the integration, e.g. webhook
+- **type** (String) Type of the integration, e.g. webhook.
 
 

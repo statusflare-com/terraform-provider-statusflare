@@ -16,7 +16,7 @@ install: build
 	mv ${BINARY} ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 
 testacc: 
-	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m -parallel 1
+	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m -parallel 3 -count=1
 
 clean:
 	rm -rf ${BINARY}
