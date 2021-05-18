@@ -18,18 +18,18 @@ func resourceMonitor() *schema.Resource {
 		"name": {
 			Type:        schema.TypeString,
 			Required:    true,
-			Description: "The name of the monitor. Must be unique.",
+			Description: "The name of the monitor.",
 		},
 		"url": {
 			Type:        schema.TypeString,
 			Required:    true,
-			Description: "URL Address but  without schema. It might be www.example.com.",
+			Description: "URL Address but without scheme, e.g. www.example.com.",
 		},
 		"scheme": {
 			Type:        schema.TypeString,
 			Optional:    true,
 			Default:     "https",
-			Description: "The scheme might be http or https. The default value is https.",
+			Description: "The scheme might be http, https, tcp, icmp. The default value is https.",
 		},
 		"method": {
 			Type:        schema.TypeString,
@@ -76,13 +76,13 @@ func resourceMonitor() *schema.Resource {
 			Type:        schema.TypeInt,
 			Default:     30,
 			Optional:    true,
-			Description: "Timeout interval in seconds.",
+			Description: "Timeout in seconds. The default is 30.",
 		},
 		"interval": {
 			Type:        schema.TypeInt,
 			Default:     300,
 			Optional:    true,
-			Description: "Check interval in seconds.",
+			Description: "Check interval in seconds. The default is 300.",
 		},
 	}
 

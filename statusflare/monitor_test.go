@@ -26,6 +26,8 @@ func Test_Monitor(t *testing.T) {
 			ExpectStatus: 200,
 			Worker:       "managed",
 			Integrations: []string{},
+			Interval:     60,
+			Timeout:      30,
 		}
 
 		err := client.CreateMonitor(m)

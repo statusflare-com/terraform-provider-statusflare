@@ -28,8 +28,8 @@ resource "statusflare_monitor" "example" {
 
 ### Required
 
-- **name** (String) The name of the monitor. Must be unique.
-- **url** (String) URL Address but  without schema. It might be www.example.com.
+- **name** (String) The name of the monitor.
+- **url** (String) URL Address but without scheme, e.g. www.example.com.
 
 ### Optional
 
@@ -37,11 +37,11 @@ resource "statusflare_monitor" "example" {
 - **follow_redirects** (Boolean)
 - **insecure_skip_verify** (Boolean)
 - **integrations** (List of String) IDs of integrations attached to this monitor.
-- **interval** (Number) Check interval in seconds.
+- **interval** (Number) Check interval in seconds. The default is 300.
 - **method** (String) The HTTP method. The default is 'GET'.
 - **retries** (Number) Retries or also 'notify_after' field in API. The default is 1.
-- **scheme** (String) The scheme might be http or https. The default value is https.
-- **timeout** (Number) Timeout interval in seconds.
+- **scheme** (String) The scheme might be http, https, tcp, icmp. The default value is https.
+- **timeout** (Number) Timeout in seconds. The default is 30.
 - **worker** (String) ID of the worker to perform checks from. The default is 'managed'.
 
 ### Read-Only
