@@ -6,19 +6,21 @@ import (
 )
 
 type Monitor struct {
-	Id                 string   `json:"id"`
-	Name               string   `json:"name"`
-	URL                string   `json:"url"`
-	Scheme             string   `json:"schema"` // not sure if it's typo in API, but I'm using Scheme here
-	Method             string   `json:"method"`
-	ExpectStatus       int      `json:"expect_status"`
-	NotifyAfter        int      `json:"notify_after"`
-	Worker             string   `json:"worker"`
-	Integrations       []string `json:"integrations"`
-	FollowRedirects    bool     `json:"follow_redirects"`
-	InsecureSkipVerify bool     `json:"insecure_skip_verify"`
-	Timeout            int      `json:"timeout"`
-	Interval           int      `json:"interval"`
+	Id                 string                 `json:"id"`
+	Name               string                 `json:"name"`
+	URL                string                 `json:"url"`
+	Scheme             string                 `json:"schema"` // not sure if it's typo in API, but I'm using Scheme here
+	Method             string                 `json:"method"`
+	ExpectStatus       int                    `json:"expect_status"`
+	NotifyAfter        int                    `json:"notify_after"`
+	Worker             string                 `json:"worker"`
+	Integrations       []string               `json:"integrations"`
+	FollowRedirects    bool                   `json:"follow_redirects"`
+	InsecureSkipVerify bool                   `json:"insecure_skip_verify"`
+	Timeout            int                    `json:"timeout"`
+	Interval           int                    `json:"interval"`
+	Headers            map[string]interface{} `json:"headers,omitempty"`
+	Body               string                 `json:"body,omitempty"`
 }
 
 // create new monitor

@@ -84,6 +84,19 @@ func resourceMonitor() *schema.Resource {
 			Optional:    true,
 			Description: "Check interval in seconds. The default is 300.",
 		},
+		"headers": {
+			Type:        schema.TypeMap,
+			Optional:    true,
+			Description: "HTTP headers for http(s) monitors.",
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			},
+		},
+		"body": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Description: "HTTP body for http(s) monitors.",
+		},
 	}
 
 	return &schema.Resource{
@@ -174,6 +187,8 @@ func dataToMonitor(src *schema.ResourceData, dst *statusflare.Monitor) {
 	dst.InsecureSkipVerify = src.Get("insecure_skip_verify").(bool)
 	dst.Timeout = src.Get("timeout").(int)
 	dst.Interval = src.Get("interval").(int)
+	dst.Headers = src.Get("headers").(map[string]interface{})
+	dst.Body = src.Get("body").(string)
 }
 
 func monitorToData(src *statusflare.Monitor, dst *schema.ResourceData) {
@@ -189,4 +204,6 @@ func monitorToData(src *statusflare.Monitor, dst *schema.ResourceData) {
 	dst.Set("insecure_skip_verify", src.InsecureSkipVerify)
 	dst.Set("timeout", src.Timeout)
 	dst.Set("interval", src.Interval)
+	dst.Set("headers", src.Headers)
+	dst.Set("body", src.Body)
 }

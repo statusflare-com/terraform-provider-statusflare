@@ -33,8 +33,10 @@ resource "statusflare_monitor" "example" {
 
 ### Optional
 
+- **body** (String) HTTP body for http(s) monitors.
 - **expect_status** (Number) The expected HTTP status code. The default is 200.
 - **follow_redirects** (Boolean)
+- **headers** (Map of String) HTTP headers for http(s) monitors.
 - **insecure_skip_verify** (Boolean)
 - **integrations** (List of String) IDs of integrations attached to this monitor.
 - **interval** (Number) Check interval in seconds. The default is 300.
