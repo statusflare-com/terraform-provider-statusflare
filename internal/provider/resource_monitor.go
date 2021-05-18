@@ -63,6 +63,27 @@ func resourceMonitor() *schema.Resource {
 			},
 			Description: "IDs of integrations attached to this monitor.",
 		},
+		"follow_redirects": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  true,
+		},
+		"insecure_skip_verify": {
+			Type:     schema.TypeBool,
+			Optional: true,
+		},
+		"timeout": {
+			Type:        schema.TypeInt,
+			Default:     30,
+			Optional:    true,
+			Description: "Timeout interval in seconds.",
+		},
+		"interval": {
+			Type:        schema.TypeInt,
+			Default:     300,
+			Optional:    true,
+			Description: "Check interval in seconds.",
+		},
 	}
 
 	return &schema.Resource{
@@ -149,6 +170,10 @@ func dataToMonitor(src *schema.ResourceData, dst *statusflare.Monitor) {
 	dst.NotifyAfter = src.Get("retries").(int)
 	dst.Worker = src.Get("worker").(string)
 	dst.Integrations = toStrArray(src.Get("integrations").([]interface{}))
+	dst.FollowRedirects = src.Get("follow_redirects").(bool)
+	dst.InsecureSkipVerify = src.Get("insecure_skip_verify").(bool)
+	dst.Timeout = src.Get("timeout").(int)
+	dst.Interval = src.Get("interval").(int)
 }
 
 func monitorToData(src *statusflare.Monitor, dst *schema.ResourceData) {
@@ -160,4 +185,8 @@ func monitorToData(src *statusflare.Monitor, dst *schema.ResourceData) {
 	dst.Set("worker", src.Worker)
 	dst.Set("retries", src.NotifyAfter)
 	dst.Set("integrations", src.Integrations)
+	dst.Set("follow_redirects", src.FollowRedirects)
+	dst.Set("insecure_skip_verify", src.InsecureSkipVerify)
+	dst.Set("timeout", src.Timeout)
+	dst.Set("interval", src.Interval)
 }
