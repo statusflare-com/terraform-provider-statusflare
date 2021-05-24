@@ -12,6 +12,7 @@ type Monitor struct {
 	Scheme             string                 `json:"schema"` // not sure if it's typo in API, but I'm using Scheme here
 	Method             string                 `json:"method"`
 	ExpectStatus       int                    `json:"expect_status"`
+	ExpectString       string                 `json:"expect_string,omitempty"`
 	NotifyAfter        int                    `json:"notify_after"`
 	Worker             string                 `json:"worker"`
 	Integrations       []string               `json:"integrations"`

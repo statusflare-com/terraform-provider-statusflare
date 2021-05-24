@@ -43,6 +43,11 @@ func resourceMonitor() *schema.Resource {
 			Default:     200,
 			Description: "The expected HTTP status code. The default is 200.",
 		},
+		"expect_string": {
+			Type:        schema.TypeString,
+			Optional:    true,
+			Description: "The expected string in the HTTP response body.",
+		},
 		"retries": {
 			Type:        schema.TypeInt,
 			Optional:    true,
@@ -180,6 +185,7 @@ func dataToMonitor(src *schema.ResourceData, dst *statusflare.Monitor) {
 	dst.Scheme = src.Get("scheme").(string)
 	dst.Method = src.Get("method").(string)
 	dst.ExpectStatus = src.Get("expect_status").(int)
+	dst.ExpectString = src.Get("expect_string").(string)
 	dst.NotifyAfter = src.Get("retries").(int)
 	dst.Worker = src.Get("worker").(string)
 	dst.Integrations = toStrArray(src.Get("integrations").([]interface{}))
@@ -197,6 +203,7 @@ func monitorToData(src *statusflare.Monitor, dst *schema.ResourceData) {
 	dst.Set("scheme", src.Scheme)
 	dst.Set("method", src.Method)
 	dst.Set("expect_status", src.ExpectStatus)
+	dst.Set("expect_string", src.ExpectString)
 	dst.Set("worker", src.Worker)
 	dst.Set("retries", src.NotifyAfter)
 	dst.Set("integrations", src.Integrations)
